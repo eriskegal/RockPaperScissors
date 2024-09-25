@@ -1,0 +1,69 @@
+import random
+
+# Initialize counters
+rounds = 0
+human_wins = 0
+computer_wins = 0
+
+# Main game loop (Best of 5 condition)
+while human_wins < 3 and computer_wins < 3:
+    print("Round", rounds + 1)
+    print("Choose: (1=Rock, 2=Paper, 3=Scissors)")
+
+    # Get human choice
+    try:
+        human_choice = int(input("Enter your choice: "))
+        if human_choice not in [1, 2, 3]:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+            continue
+    except ValueError:
+        print("Invalid choice. Please enter a number (1, 2, or 3).")
+        continue
+
+    # Map human choice to names
+    if human_choice == 1:
+        human_choice_name = "Rock"
+    elif human_choice == 2:
+        human_choice_name = "Paper"
+    elif human_choice == 3:
+        human_choice_name = "Scissors"
+
+    # Computer random choice
+    computer_choice = random.randint(1, 3)
+    if computer_choice == 1:
+        computer_choice_name = "Rock"
+    elif computer_choice == 2:
+        computer_choice_name = "Paper"
+    elif computer_choice == 3:
+        computer_choice_name = "Scissors"
+
+    print("You chose:", human_choice_name)
+    print("Computer chose:", computer_choice_name)
+
+    # Determine the result
+    if human_choice == computer_choice:
+        result = "Tie"
+    elif (human_choice == 1 and computer_choice == 3) or \
+         (human_choice == 2 and computer_choice == 1) or \
+         (human_choice == 3 and computer_choice == 2):
+        result = "Win"
+        human_wins += 1  # Increment human win counter
+    else:
+        result = "Lose"
+        computer_wins += 1  # Increment computer win counter
+
+    print("You", result)
+
+    rounds += 1
+
+    # Print total wins for both players
+    print(f"Total Wins - You: {human_wins}, Computer: {computer_wins}\n")
+
+# Check if either player has won the best of 5
+if human_wins == 3:
+    print("Congratulations! You won the best of 5!")
+elif computer_wins == 3:
+    print("The computer won the best of 5. Better luck next time!")
+
+# End the game and exit
+print("Goodbye! Thanks for playing.")
